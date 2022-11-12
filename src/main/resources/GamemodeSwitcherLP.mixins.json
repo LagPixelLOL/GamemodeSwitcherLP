@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "atmt.v2ray.gamemodeswitcherlp.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MeCommandMixin",
+    "SayCommandMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

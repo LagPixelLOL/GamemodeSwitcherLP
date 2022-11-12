@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "gamemodeswitcherlp",
+  "version": "${version}",
+  "name": "GamemodeSwitcherLP",
+  "description": "Serverside mod for switching gamemodes with luckperms support.",
+  "authors": [
+    "v2ray",
+    "v2rayATMT"
+  ],
+  "contact": {
+    "website": "https://lagpixel.cn/",
+    "repo": "GSLP"
+  },
+  "license": "MIT",
+  "icon": "assets/GamemodeSwitcherLP/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP"
+    ]
+  },
+  "mixins": [
+    "GamemodeSwitcherLP.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
