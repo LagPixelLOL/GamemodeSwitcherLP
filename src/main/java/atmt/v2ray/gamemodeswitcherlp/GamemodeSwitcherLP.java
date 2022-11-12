@@ -19,6 +19,6 @@ public class GamemodeSwitcherLP implements ModInitializer {
     public void onInitialize() {
         GSLPRegistry.addCommands();
         GSLPRegistry.registerCommands();
-        logger.info("GSLP Loaded.test");
+        logger.info("GSLP Loaded.");
     }
 }
