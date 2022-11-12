@@ -15,6 +15,9 @@ public class GamemodeSwitcherLP implements ModInitializer {
     public static final String prefix = "§3[§e§lGS§b§lL§3§lP§3] ";
     public static final Logger logger = LogManager.getLogger("GSLP");
 
+    /**
+     * Initialize.
+     */
     @Override
     public void onInitialize() {
         GSLPRegistry.addCommands();
