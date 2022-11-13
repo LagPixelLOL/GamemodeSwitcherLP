@@ -7,6 +7,7 @@ public enum Permissions {
     GAMEMODE_CREATIVE(GAMEMODE + ".creative"),
     GAMEMODE_SPECTATOR(GAMEMODE + ".spectator"),
     GAMEMODE_ADVENTURE(GAMEMODE + ".adventure"),
+    SPECTATE(GSLP + ".spectate"),
     SUICIDE(GSLP + ".suicide"),
     MINECRAFT("minecraft"),
     MINECRAFT_ME(MINECRAFT + ".me"),

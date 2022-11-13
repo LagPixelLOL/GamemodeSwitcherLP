@@ -1,9 +1,6 @@
 package atmt.v2ray.gamemodeswitcherlp;
 
-import atmt.v2ray.gamemodeswitcherlp.command.Command;
-import atmt.v2ray.gamemodeswitcherlp.command.GSLPCommand;
-import atmt.v2ray.gamemodeswitcherlp.command.GmCommand;
-import atmt.v2ray.gamemodeswitcherlp.command.SuicideCommand;
+import atmt.v2ray.gamemodeswitcherlp.command.*;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -18,6 +15,9 @@ public class GSLPRegistry {
         Command.add(new GmCommand.GmcCommand());
         Command.add(new GmCommand.GmspCommand());
         Command.add(new GmCommand.GmaCommand());
+        SpecCommand specCommand = new SpecCommand();
+        Command.add(specCommand);
+        Command.add(specCommand.getSCommand());
         Command.add(new GSLPCommand());
         Command.add(new SuicideCommand());
     }
