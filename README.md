@@ -10,8 +10,6 @@ also added a suicide command and /say /me permission control.
 
 *Currently you can't change other player's gamemode with these commands, but i will add it if there are actually some downloads.
 
-**This is my first project on curseforge!
-
  
 
 # Permissions:
