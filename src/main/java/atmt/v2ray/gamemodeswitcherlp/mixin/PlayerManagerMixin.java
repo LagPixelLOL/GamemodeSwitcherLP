@@ -1,5 +1,7 @@
 package atmt.v2ray.gamemodeswitcherlp.mixin;
 
+import atmt.v2ray.gamemodeswitcherlp.GSLPRegistry;
+import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.s2c.play.ExperienceBarUpdateS2CPacket;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -18,5 +20,10 @@ public class PlayerManagerMixin {
     private void sendPlayerStatus(ServerPlayerEntity player, CallbackInfo ci) {
         player.networkHandler.sendPacket(new ExperienceBarUpdateS2CPacket(
                 player.experienceProgress, player.totalExperience, player.experienceLevel));
+    }
+
+    @Inject(at = @At("RETURN"), method = "onPlayerConnect")
+    private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
+        GSLPRegistry.registerPermission(player);
     }
 }

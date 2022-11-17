@@ -1,6 +1,7 @@
-package atmt.v2ray.gamemodeswitcherlp.command;
+package atmt.v2ray.gamemodeswitcherlp.command.gamemode;
 
 import atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP;
+import atmt.v2ray.gamemodeswitcherlp.command.Command;
 import atmt.v2ray.gamemodeswitcherlp.util.GamemodeSetter;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;

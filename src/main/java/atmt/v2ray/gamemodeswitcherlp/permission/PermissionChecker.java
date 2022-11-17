@@ -1,6 +1,7 @@
 package atmt.v2ray.gamemodeswitcherlp.permission;
 
 import net.minecraft.command.CommandSource;
+import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +25,11 @@ public class PermissionChecker {
     public static boolean check(@NotNull CommandSource source, @NotNull String permission, int defaultRequireLevel) {
         return Permissions.getPermissionValue(source, permission)
                 .orElse(source.hasPermissionLevel(Math.max(0, defaultRequireLevel)));
+    }
+
+    public static boolean check(@NotNull Entity entity, @NotNull String permission, int defaultRequireLevel) {
+        return Permissions.getPermissionValue(entity, permission)
+                .orElse(entity.hasPermissionLevel(Math.max(0, defaultRequireLevel)));
     }
 
     public static boolean checkAny(@NotNull CommandSource source, @NotNull String[] permissions, int defaultRequireLevel) {

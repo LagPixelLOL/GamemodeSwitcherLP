@@ -1,5 +1,6 @@
-package atmt.v2ray.gamemodeswitcherlp.command;
+package atmt.v2ray.gamemodeswitcherlp.command.gamemode;
 
+import atmt.v2ray.gamemodeswitcherlp.command.Command;
 import atmt.v2ray.gamemodeswitcherlp.util.MinecraftLocation;
 import atmt.v2ray.gamemodeswitcherlp.util.PlayerSpecContainer;
 import com.mojang.brigadier.context.CommandContext;
@@ -39,6 +40,9 @@ public class SpecCommand extends Command {
         sCommand.execute(context);
     }
 
+    /**
+     * @return /s command instance.
+     */
     public SCommand getSCommand() {
         return sCommand;
     }

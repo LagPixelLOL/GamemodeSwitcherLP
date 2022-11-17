@@ -1,6 +1,7 @@
 package atmt.v2ray.gamemodeswitcherlp.command;
 
 import atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP;
+import atmt.v2ray.gamemodeswitcherlp.config.Config;
 import atmt.v2ray.gamemodeswitcherlp.permission.PermissionChecker;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -20,12 +21,21 @@ public class GSLPCommand extends Command {
 
     @Override
     public void register(IConsumer<LiteralCommandNode<ServerCommandSource>> registerNode) {
-        LiteralArgumentBuilder<ServerCommandSource> gslpBuilder = literal(getName());
-        LiteralArgumentBuilder<ServerCommandSource> infoBuilder = literal("info");
-        LiteralCommandNode<ServerCommandSource> gslpNode = gslpBuilder.requires(
+        LiteralCommandNode<ServerCommandSource> gslpNode = literal(getName()).requires(
                 PermissionChecker.require(getPermission(), getDefaultPermissionLevel())).executes(this).build();
+        LiteralArgumentBuilder<ServerCommandSource> infoBuilder = literal("info");
+        LiteralArgumentBuilder<ServerCommandSource> reloadBuilder = literal("reload");
         infoBuilder.requires(PermissionChecker.require(getPermission(), getDefaultPermissionLevel())).executes(this);
+        reloadBuilder.requires(PermissionChecker.require(GSLP_ADMIN.toString(), 4)).executes(context -> {
+            Config.reload();
+            ServerCommandSource source = context.getSource();
+            source.sendMessage(Text.literal(GamemodeSwitcherLP.prefix + "§6Reload config success!"));
+            GamemodeSwitcherLP.logger.info(String.format("%s reloaded GamemodeSwitcherLP config.",
+                    source.getDisplayName().getString()));
+            return 1;
+        });
         gslpNode.addChild(infoBuilder.build());
+        gslpNode.addChild(reloadBuilder.build());
         registerNode.accept(gslpNode);
     }
 

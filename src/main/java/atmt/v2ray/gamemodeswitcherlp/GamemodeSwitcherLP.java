@@ -1,5 +1,6 @@
 package atmt.v2ray.gamemodeswitcherlp;
 
+import atmt.v2ray.gamemodeswitcherlp.config.Config;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
@@ -20,8 +21,12 @@ public class GamemodeSwitcherLP implements ModInitializer {
      */
     @Override
     public void onInitialize() {
+        long prevTime = System.currentTimeMillis();
+        logger.info("GSLP starts loading...");
+        Config.initialize();
+        GSLPRegistry.registerEvents();
         GSLPRegistry.addCommands();
         GSLPRegistry.registerCommands();
-        logger.info("GSLP Loaded.");
+        logger.info(String.format("GSLP loaded, took %d ms.", System.currentTimeMillis() - prevTime));
     }
 }

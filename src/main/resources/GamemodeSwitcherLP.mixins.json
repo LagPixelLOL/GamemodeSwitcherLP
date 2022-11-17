@@ -6,7 +6,8 @@
   "mixins": [
     "MeCommandMixin",
     "PlayerManagerMixin",
-    "SayCommandMixin"
+    "SayCommandMixin",
+    "SPNHMixin"
   ],
   "client": [
   ],
