@@ -6,4 +6,5 @@ import io.wispforest.owo.config.annotation.Config;
 public class ConfigModel {
     public double speedLimit = -1;
     public boolean notifyConsole = true;
+    public int notifyServerListPingIntervalSeconds = -1;
 }

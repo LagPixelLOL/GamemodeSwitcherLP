@@ -1,8 +1,8 @@
 package atmt.v2ray.gamemodeswitcherlp.command.gamemode;
 
 import atmt.v2ray.gamemodeswitcherlp.command.Command;
-import atmt.v2ray.gamemodeswitcherlp.util.MinecraftLocation;
-import atmt.v2ray.gamemodeswitcherlp.util.PlayerSpecContainer;
+import atmt.v2ray.gamemodeswitcherlp.data.MinecraftLocation;
+import atmt.v2ray.gamemodeswitcherlp.data.PlayerSpecContainer;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.LiteralCommandNode;

@@ -1,9 +1,6 @@
 package atmt.v2ray.gamemodeswitcherlp;
 
-import atmt.v2ray.gamemodeswitcherlp.command.Command;
-import atmt.v2ray.gamemodeswitcherlp.command.GSLPCommand;
-import atmt.v2ray.gamemodeswitcherlp.command.SpeedLimitCommand;
-import atmt.v2ray.gamemodeswitcherlp.command.SuicideCommand;
+import atmt.v2ray.gamemodeswitcherlp.command.*;
 import atmt.v2ray.gamemodeswitcherlp.command.gamemode.GmCommand;
 import atmt.v2ray.gamemodeswitcherlp.command.gamemode.SpecCommand;
 import atmt.v2ray.gamemodeswitcherlp.event.ServerTickListener;
@@ -37,6 +34,7 @@ public class GSLPRegistry {
         Command.add(new GSLPCommand());
         Command.add(new SuicideCommand());
         Command.add(new SpeedLimitCommand());
+        Command.add(new SLPingNotifierCommand());
     }
 
     public static void registerCommands() {

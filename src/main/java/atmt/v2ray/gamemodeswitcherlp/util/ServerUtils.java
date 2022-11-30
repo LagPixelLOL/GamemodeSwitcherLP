@@ -22,4 +22,8 @@ public class ServerUtils {
     public static void setServer(MinecraftServer server) {
         ServerUtils.server = server;
     }
+
+    public static int secondsToTicks(int seconds) {
+        return seconds * 20;
+    }
 }

@@ -1,4 +1,4 @@
-package atmt.v2ray.gamemodeswitcherlp.util;
+package atmt.v2ray.gamemodeswitcherlp.data;
 
 import net.minecraft.world.GameMode;
 

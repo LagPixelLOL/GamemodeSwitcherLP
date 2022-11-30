@@ -1,6 +1,5 @@
 package atmt.v2ray.gamemodeswitcherlp.command;
 
-import atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP;
 import atmt.v2ray.gamemodeswitcherlp.config.Config;
 import atmt.v2ray.gamemodeswitcherlp.permission.PermissionChecker;
 import atmt.v2ray.gamemodeswitcherlp.util.Utils;
@@ -54,9 +53,8 @@ public class SpeedLimitCommand extends Command {
     @Override
     public void execute(CommandContext<ServerCommandSource> context) {
         double speedLimit = Config.getConfig().speedLimit();
-        context.getSource().sendMessage(Text.literal(GamemodeSwitcherLP.prefix +
-                String.format("Current speed limit: %s",
-                        speedLimit >= 0 ? String.format("§e%f BPS", speedLimit) : "§cCancelled")));
+        context.getSource().sendMessage(Text.literal(prefix + String.format("Current speed limit: %s",
+                speedLimit >= 0 ? String.format("§e%f BPS", speedLimit) : "§cCancelled")));
     }
 
     private int setSpeedLimit(CommandContext<ServerCommandSource> context) {
