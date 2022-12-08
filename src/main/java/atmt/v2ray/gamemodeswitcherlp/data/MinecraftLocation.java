@@ -1,11 +1,11 @@
 package atmt.v2ray.gamemodeswitcherlp.data;
 
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class MinecraftLocation {
@@ -42,7 +42,7 @@ public class MinecraftLocation {
     }
 
     private void loadNbt(NbtCompound tag) {
-        dimension = RegistryKey.of(Registry.WORLD_KEY, Identifier.tryParse(tag.getString("WorldRegistryKey")));
+        dimension = RegistryKey.of(RegistryKeys.WORLD, Identifier.tryParse(tag.getString("WorldRegistryKey")));
         pos = new Vec3d(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z"));
         headYaw = tag.getFloat("headYaw");
         pitch = tag.getFloat("pitch");
