@@ -14,7 +14,7 @@ added permission for /me and /say - you can use this to toggle player's ability 
 added speed limiter for players - you can control player's max speed with permissions. \
 added command /speedlimit - toggles or sets arguments for speed limiter(blocks per second, notify console). \
 added notification for server list ping - you can see who are refreshing their server lists :D. \
-added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier.
+added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier, use "/serverlistpingnotifier set 0" to turn it off.
 ### Fixed:
 fixed a vanilla bug - desync exp bar when teleporting across dimensions.
 ## Permissions:
