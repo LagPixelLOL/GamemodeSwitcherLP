@@ -16,7 +16,9 @@ added command /speedlimit - toggles or sets arguments for speed limiter(blocks p
 added notification for server list ping - you can see who are refreshing their server lists :D. \
 added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier, use "/serverlistpingnotifier set 0" to turn it off.
 ### Fixed:
-fixed a vanilla bug - desync exp bar when teleporting across dimensions.
+fixed vanilla bug - desync exp bar when teleporting across dimensions. \
+fixed vanilla bug - desync potion effect when teleporting across dimensions. \
+fixed vanilla bug - desync player ability when teleporting across dimensions.
 ## Permissions:
 gslp.admin - set GamemodeSwitcherLP admin permission. \
 gslp.gamemode.survival - set gamemode to survival permission. \

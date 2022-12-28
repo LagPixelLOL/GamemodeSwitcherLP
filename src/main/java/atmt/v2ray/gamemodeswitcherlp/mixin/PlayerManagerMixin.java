@@ -2,7 +2,9 @@ package atmt.v2ray.gamemodeswitcherlp.mixin;
 
 import atmt.v2ray.gamemodeswitcherlp.GSLPRegistry;
 import net.minecraft.network.ClientConnection;
+import net.minecraft.network.packet.s2c.play.EntityStatusEffectS2CPacket;
 import net.minecraft.network.packet.s2c.play.ExperienceBarUpdateS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +20,11 @@ public class PlayerManagerMixin {
      */
     @Inject(at = @At("RETURN"), method = "sendPlayerStatus")
     private void sendPlayerStatus(ServerPlayerEntity player, CallbackInfo ci) {
-        player.networkHandler.sendPacket(new ExperienceBarUpdateS2CPacket(
+        var nwHdr = player.networkHandler;
+        nwHdr.sendPacket(new ExperienceBarUpdateS2CPacket(
                 player.experienceProgress, player.totalExperience, player.experienceLevel));
+        player.getStatusEffects().forEach(effect -> nwHdr.sendPacket(new EntityStatusEffectS2CPacket(player.getId(), effect)));
+        nwHdr.sendPacket(new PlayerAbilitiesS2CPacket(player.getAbilities()));
     }
 
     @Inject(at = @At("RETURN"), method = "onPlayerConnect")
