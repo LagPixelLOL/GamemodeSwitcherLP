@@ -16,6 +16,7 @@ import org.spongepowered.asm.util.IConsumer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 import static atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP.*;
 import static atmt.v2ray.gamemodeswitcherlp.permission.PermissionChecker.*;
@@ -24,6 +25,10 @@ import static net.minecraft.server.command.CommandManager.*;
 
 public class SpecCommand extends Command {
     private final SCommand sCommand = new SCommand();
+    /**
+     * Key = player's uuid, Value = player's location and prev gamemode.
+     */
+    private static final Map<UUID, PlayerSpecContainer> playerMap = new HashMap<>();
 
     public SpecCommand() {
         super("spec", SPECTATE.toString(), (byte)4);
@@ -47,8 +52,11 @@ public class SpecCommand extends Command {
         return sCommand;
     }
 
+    public static boolean isPlayerSpectating(ServerPlayerEntity player) {
+        return playerMap.containsKey(player.getGameProfile().getId());
+    }
+
     public static class SCommand extends Command {
-        private static final Map<ServerPlayerEntity, PlayerSpecContainer> playerMap = new HashMap<>();
 
         public SCommand() {
             super("s", SPECTATE.toString(), (byte)4);
@@ -64,10 +72,11 @@ public class SpecCommand extends Command {
         public void execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
             ServerCommandSource source = context.getSource();
             ServerPlayerEntity player = source.getPlayerOrThrow();
-            if (!playerMap.containsKey(player)) {
+            UUID uuid = player.getGameProfile().getId();
+            if (!playerMap.containsKey(uuid)) {
                 GameMode prevGameMode = player.interactionManager.getGameMode();
                 if (player.changeGameMode(GameMode.SPECTATOR)) {
-                    playerMap.put(player, new PlayerSpecContainer(new MinecraftLocation(player), prevGameMode));
+                    playerMap.put(uuid, new PlayerSpecContainer(new MinecraftLocation(player), prevGameMode));
                     source.sendMessage(Text.literal(prefix + "§6Start spectating, " +
                             "you will be teleported back and stop spectating if you use this command again."));
                 } else {
@@ -75,7 +84,7 @@ public class SpecCommand extends Command {
                 }
                 return;
             }
-            PlayerSpecContainer playerSpecContainer = playerMap.remove(player);
+            PlayerSpecContainer playerSpecContainer = playerMap.remove(uuid);
             MinecraftLocation location = playerSpecContainer.location();
             Vec3d pos = location.getPos();
             try {
