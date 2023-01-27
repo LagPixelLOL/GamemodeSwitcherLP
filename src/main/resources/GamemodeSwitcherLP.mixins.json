@@ -4,6 +4,7 @@
   "package": "atmt.v2ray.gamemodeswitcherlp.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ClientConnectionMixin",
     "LQHMixin",
     "MeCommandMixin",
     "PlayerManagerMixin",

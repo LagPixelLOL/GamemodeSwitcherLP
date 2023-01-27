@@ -7,4 +7,5 @@ public class ConfigModel {
     public double speedLimit = -1;
     public boolean notifyConsole = true;
     public int notifyServerListPingIntervalSeconds = -1;
+    public int packetLimit = 100;
 }
