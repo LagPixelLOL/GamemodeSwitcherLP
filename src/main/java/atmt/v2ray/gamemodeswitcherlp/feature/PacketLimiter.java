@@ -18,7 +18,7 @@ public class PacketLimiter {
         Text displayName = player.getDisplayName();
         ServerUtils.notifyOps(Text.literal(GamemodeSwitcherLP.prefix + "§c").append(displayName)
                 .append(Text.literal("§c sent too many packets!")), Permissions.PACKETLIMIT_NOTIFY, 4);
-        if (Config.getConfig().slNotifyConsole()) {
+        if (Config.getConfig().plNotifyConsole()) {
             GamemodeSwitcherLP.logger.warn(String.format("%s sent too many packets!", displayName.getString()));
         }
     }
