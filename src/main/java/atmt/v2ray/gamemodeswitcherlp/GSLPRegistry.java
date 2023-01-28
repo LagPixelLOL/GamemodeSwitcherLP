@@ -4,6 +4,7 @@ import atmt.v2ray.gamemodeswitcherlp.command.*;
 import atmt.v2ray.gamemodeswitcherlp.command.gamemode.GmCommand;
 import atmt.v2ray.gamemodeswitcherlp.command.gamemode.SpecCommand;
 import atmt.v2ray.gamemodeswitcherlp.event.ServerTickListener;
+import atmt.v2ray.gamemodeswitcherlp.permission.Permissions;
 import atmt.v2ray.gamemodeswitcherlp.util.PermissionUtils;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
@@ -12,8 +13,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.util.IConsumer;
-
-import static atmt.v2ray.gamemodeswitcherlp.permission.Permissions.*;
 
 public class GSLPRegistry {
     private static boolean permissionRegistered = false;
@@ -35,6 +34,7 @@ public class GSLPRegistry {
         Command.add(new SuicideCommand());
         Command.add(new SpeedLimitCommand());
         Command.add(new SLPingNotifierCommand());
+        Command.add(new PacketLimitCommand());
     }
 
     public static void registerCommands() {
@@ -49,9 +49,9 @@ public class GSLPRegistry {
         if (permissionRegistered) {
             return;
         }
-        PermissionUtils.register(GSLP_ADMIN, player);
-        PermissionUtils.register(SPEEDLIMIT_INFO, player);
-        PermissionUtils.register(SPEEDLIMIT_NOTIFY, player);
+        for (Permissions permission : Permissions.values()) {
+            PermissionUtils.register(permission, player);
+        }
         permissionRegistered = true;
     }
 }

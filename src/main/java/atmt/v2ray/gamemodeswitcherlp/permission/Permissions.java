@@ -14,6 +14,10 @@ public enum Permissions {
     SPEEDLIMIT_INFO(SPEEDLIMIT + ".info"),
     SPEEDLIMIT_BYPASS(SPEEDLIMIT + ".bypass"),
     SPEEDLIMIT_NOTIFY(SPEEDLIMIT + ".notify"),
+    PACKETLIMIT(GSLP + ".packetlimit"),
+    PACKETLIMIT_INFO(PACKETLIMIT + ".info"),
+    PACKETLIMIT_BYPASS(PACKETLIMIT + ".bypass"),
+    PACKETLIMIT_NOTIFY(PACKETLIMIT + ".notify"),
     MINECRAFT("minecraft"),
     MINECRAFT_ME(MINECRAFT + ".me"),
     MINECRAFT_SAY(MINECRAFT + ".say");

@@ -1,6 +1,5 @@
 package atmt.v2ray.gamemodeswitcherlp.event;
 
-import atmt.v2ray.gamemodeswitcherlp.feature.PacketLimiter;
 import atmt.v2ray.gamemodeswitcherlp.feature.ServerListPingNotifier;
 import atmt.v2ray.gamemodeswitcherlp.util.ServerUtils;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -12,6 +11,5 @@ public class ServerTickListener implements ServerTickEvents.StartTick {
     public void onStartTick(MinecraftServer server) {
         ServerUtils.setServer(server);
         ServerListPingNotifier.onServerTick();
-        PacketLimiter.onServerTick();
     }
 }

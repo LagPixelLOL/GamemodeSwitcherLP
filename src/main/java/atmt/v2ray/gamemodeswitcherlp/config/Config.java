@@ -5,6 +5,12 @@ public class Config {
 
     public static void initialize() {
         config = atmt.v2ray.gamemodeswitcherlp.config.GSLPConfig.createAndLoad();
+
+        //deprecate-update
+        if (!config.notifyConsole()) {
+            config.slNotifyConsole(false);
+            config.notifyConsole(true);
+        }
     }
 
     public static void reload() {

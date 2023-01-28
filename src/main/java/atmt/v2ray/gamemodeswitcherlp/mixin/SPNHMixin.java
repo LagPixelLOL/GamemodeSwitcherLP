@@ -3,7 +3,11 @@ package atmt.v2ray.gamemodeswitcherlp.mixin;
 import atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP;
 import atmt.v2ray.gamemodeswitcherlp.config.Config;
 import atmt.v2ray.gamemodeswitcherlp.feature.SpeedLimiter;
+import atmt.v2ray.gamemodeswitcherlp.interfaces.SPNHMixinAccessor;
+import atmt.v2ray.gamemodeswitcherlp.permission.Permissions;
+import atmt.v2ray.gamemodeswitcherlp.util.ServerUtils;
 import atmt.v2ray.gamemodeswitcherlp.util.SpeedUtils;
+import atmt.v2ray.gamemodeswitcherlp.util.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -24,9 +28,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Mixin(ServerPlayNetworkHandler.class)
-public abstract class SPNHMixin {
+public abstract class SPNHMixin implements SPNHMixinAccessor {
     @Shadow public ServerPlayerEntity player;
     @Shadow private double lastTickX;
     @Shadow private double lastTickY;
@@ -50,9 +55,10 @@ public abstract class SPNHMixin {
                 player.sendMessage(Text.literal(GamemodeSwitcherLP.prefix +
                         String.format("§cYou are moving too fast! §3(BPS:%f)", blocksPerSecond)));
                 Text displayName = player.getDisplayName();
-                SpeedLimiter.notifyOps(Text.literal(GamemodeSwitcherLP.prefix + "§c").append(displayName)
-                        .append(Text.literal(String.format("§c is moving too fast! §3(BPS:%f)", blocksPerSecond))));
-                if (Config.getConfig().notifyConsole()) {
+                ServerUtils.notifyOps(Text.literal(GamemodeSwitcherLP.prefix + "§c").append(displayName)
+                        .append(Text.literal(String.format("§c is moving too fast! §3(BPS:%f)", blocksPerSecond))),
+                        Permissions.SPEEDLIMIT_NOTIFY, 4);
+                if (Config.getConfig().slNotifyConsole()) {
                     GamemodeSwitcherLP.logger.warn(String.format("%s is moving too fast! (BPS:%f)",
                             displayName.getString(), blocksPerSecond));
                 }
@@ -75,9 +81,10 @@ public abstract class SPNHMixin {
                 player.sendMessage(Text.literal(GamemodeSwitcherLP.prefix +
                         String.format("§cYour vehicle is moving too fast! §3(BPS:%f)", blocksPerSecond)));
                 Text displayName = player.getDisplayName();
-                SpeedLimiter.notifyOps(Text.literal(GamemodeSwitcherLP.prefix + "§c").append(displayName)
-                        .append(Text.literal(String.format("§c's vehicle is moving too fast! §3(BPS:%f)", blocksPerSecond))));
-                if (Config.getConfig().notifyConsole()) {
+                ServerUtils.notifyOps(Text.literal(GamemodeSwitcherLP.prefix + "§c").append(displayName)
+                        .append(Text.literal(String.format("§c's vehicle is moving too fast! §3(BPS:%f)", blocksPerSecond))),
+                        Permissions.SPEEDLIMIT_NOTIFY, 4);
+                if (Config.getConfig().slNotifyConsole()) {
                     GamemodeSwitcherLP.logger.warn(String.format("%s's vehicle is moving too fast! (BPS:%f)",
                             displayName.getString(), blocksPerSecond));
                 }
@@ -91,5 +98,21 @@ public abstract class SPNHMixin {
     private void requestTeleport(double x, double y, double z, float yaw, float pitch,
                                  Set<PlayerPositionLookS2CPacket.Flag> flags, boolean shouldDismount, CallbackInfo ci) {
         SpeedLimiter.onPlayerTeleport(player, new Vec3d(x, y, z));
+    }
+
+    private final AtomicInteger packetsPerSecond = new AtomicInteger();
+
+    public boolean onPlayerPacketReceived() {
+        packetsPerSecond.incrementAndGet();
+        long packetLimit = Config.getConfig().packetLimit();
+        return packetLimit > 0 && packetsPerSecond.get() > packetLimit;
+    }
+
+    @Inject(at = @At("HEAD"), method = "tick")
+    private void onTick(CallbackInfo ci) {
+        if (Utils.getTicks() % 20 != 0) {
+            return;
+        }
+        packetsPerSecond.set(0);
     }
 }

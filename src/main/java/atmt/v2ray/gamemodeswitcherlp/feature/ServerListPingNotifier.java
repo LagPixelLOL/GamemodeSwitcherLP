@@ -1,11 +1,12 @@
 package atmt.v2ray.gamemodeswitcherlp.feature;
 
 import atmt.v2ray.gamemodeswitcherlp.config.Config;
-import atmt.v2ray.gamemodeswitcherlp.config.GSLPConfig;
 import atmt.v2ray.gamemodeswitcherlp.util.ServerUtils;
 import atmt.v2ray.gamemodeswitcherlp.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static atmt.v2ray.gamemodeswitcherlp.GamemodeSwitcherLP.logger;
@@ -23,8 +24,7 @@ public class ServerListPingNotifier {
 
     public static void onServerTick() {
         int ticks = Utils.getTicks();
-        GSLPConfig config = Config.getConfig();
-        int intervalSeconds = config.notifyServerListPingIntervalSeconds();
+        int intervalSeconds = Config.getConfig().notifyServerListPingIntervalSeconds();
         if (intervalSeconds > 0 && ticks % ServerUtils.secondsToTicks(intervalSeconds) == 0 && !pingCountMap.isEmpty()) {
             logger.info(Utils.getSeparator());
             logger.info(String.format("Server List Ping(s) in the last %d seconds:", intervalSeconds));

@@ -14,7 +14,9 @@ added permission for /me and /say - you can use this to toggle player's ability 
 added speed limiter for players - you can control player's max speed with permissions. \
 added command /speedlimit - toggles or sets arguments for speed limiter(blocks per second, notify console). \
 added notification for server list ping - you can see who are refreshing their server lists :D. \
-added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier, use "/serverlistpingnotifier set 0" to turn it off.
+added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier, use "/serverlistpingnotifier set 0" to turn it off. \
+added packet limiter for players - you can control player's max packets per second with permissions. \
+added command /packetlimit - toggles or sets arguments for packet limiter(packets per second, exceeded command(use "%player%" to represent the player name, use "&" to change colour, use "\&" to represent "&")).
 ### Fixed:
 fixed vanilla bug - desync exp bar when teleporting across dimensions. \
 fixed vanilla bug - desync potion effect when teleporting across dimensions. \
@@ -29,7 +31,10 @@ gslp.spectate - /spec /s permission. \
 gslp.suicide - /suicide permission. \
 gslp.speedlimit.info - /speedlimit info permission. \
 gslp.speedlimit.bypass - set bypass speed limit permission. \
-gslp.speedlimit.notify - set show players that are moving too fast permission. \
+gslp.speedlimit.notify - set show players that are moving too fast notification permission. \
+gslp.packetlimit.info - /packetlimit info permission. \
+gslp.packetlimit.bypass - set bypass packet limit permission. \
+gslp.packetlimit.notify - set show players that exceeded packet limit notification permission. \
 minecraft.me - /me permission. \
 minecraft.say - /say permission.
 ## Note:

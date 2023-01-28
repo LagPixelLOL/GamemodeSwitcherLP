@@ -9,6 +9,10 @@ public class Utils {
     public static String boolToColouredString(boolean bool) {
         return bool ? "§atrue" : "§cfalse";
     }
+    
+    public static String parseColour(String input) {
+        return input.replaceAll("(?<!\\\\)&", "§").replace("\\&", "&");
+    }
 
     public static String getSeparator() {
         return "--------------------------------------------------";

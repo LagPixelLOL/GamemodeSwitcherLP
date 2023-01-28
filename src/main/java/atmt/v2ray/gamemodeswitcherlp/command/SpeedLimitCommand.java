@@ -75,11 +75,12 @@ public class SpeedLimitCommand extends Command {
 
     private int setNotifyConsole(CommandContext<ServerCommandSource> context) {
         boolean shouldNotifyConsole = BoolArgumentType.getBool(context, "shouldNotifyConsole");
-        Config.getConfig().notifyConsole(shouldNotifyConsole);
+        Config.getConfig().slNotifyConsole(shouldNotifyConsole);
         ServerCommandSource source = context.getSource();
         source.sendMessage(Text.literal(prefix +
-                String.format("§6Set notify console to %s§6.", Utils.boolToColouredString(shouldNotifyConsole))));
-        logger.info(String.format("%s set notify console to %b.", source.getDisplayName().getString(), shouldNotifyConsole));
+                String.format("§6Set speed limit notify console to %s§6.", Utils.boolToColouredString(shouldNotifyConsole))));
+        logger.info(String.format("%s set speed limit notify console to %b.",
+                source.getDisplayName().getString(), shouldNotifyConsole));
         return 1;
     }
 }

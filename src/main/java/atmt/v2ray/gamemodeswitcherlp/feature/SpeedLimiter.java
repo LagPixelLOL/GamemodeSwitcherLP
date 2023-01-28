@@ -3,11 +3,9 @@ package atmt.v2ray.gamemodeswitcherlp.feature;
 import atmt.v2ray.gamemodeswitcherlp.config.Config;
 import atmt.v2ray.gamemodeswitcherlp.permission.PermissionChecker;
 import atmt.v2ray.gamemodeswitcherlp.permission.Permissions;
-import atmt.v2ray.gamemodeswitcherlp.util.ServerUtils;
 import atmt.v2ray.gamemodeswitcherlp.util.SpeedUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.Map;
@@ -55,14 +53,6 @@ public class SpeedLimiter {
 
     public static boolean playerNotRecentlyTeleported(ServerPlayerEntity player) {
         return !playerMap.containsKey(player);
-    }
-
-    public static void notifyOps(Text message) {
-        ServerUtils.getPlayers().forEach(player -> {
-            if (PermissionChecker.check(player, Permissions.SPEEDLIMIT_NOTIFY.toString(), 4)) {
-                player.sendMessage(message);
-            }
-        });
     }
 
     private static class TeleportInfo {
