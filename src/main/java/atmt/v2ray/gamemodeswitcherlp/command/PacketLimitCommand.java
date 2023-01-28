@@ -57,9 +57,9 @@ public class PacketLimitCommand extends Command {
 
     @Override
     public void execute(CommandContext<ServerCommandSource> context) {
-        double packetLimit = Config.getConfig().packetLimit();
+        long packetLimit = Config.getConfig().packetLimit();
         context.getSource().sendMessage(Text.literal(prefix + String.format("Current packet limit: %s",
-                packetLimit > 0 ? String.format("§e%f PPS", packetLimit) : "§cCancelled")));
+                packetLimit > 0 ? String.format("§e%d PPS", packetLimit) : "§cCancelled")));
     }
 
     private int setPacketLimit(CommandContext<ServerCommandSource> context) {
