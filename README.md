@@ -16,7 +16,7 @@ added command /speedlimit - toggles or sets arguments for speed limiter(blocks p
 added notification for server list ping - you can see who are refreshing their server lists :D. \
 added command /serverlistpingnotifier - toggles or sets arguments for Server List Ping Notifier, use "/serverlistpingnotifier set 0" to turn it off. \
 added packet limiter for players - you can control player's max packets per second with permissions. \
-added command /packetlimit - toggles or sets arguments for packet limiter(packets per second, exceeded command(use "%player%" to represent the player name, use "&" to change colour, use "\&" to represent "&")).
+added command /packetlimit - toggles or sets arguments for packet limiter(packets per second, exceeded command(use "%player%" to represent the player name, use "&" to change colour, use "\\&" to represent "&")).
 ### Fixed:
 fixed vanilla bug - desync exp bar when teleporting across dimensions. \
 fixed vanilla bug - desync potion effect when teleporting across dimensions. \
